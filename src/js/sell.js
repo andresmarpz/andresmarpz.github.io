@@ -122,28 +122,24 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             //Aquí ingresa si pasó los controles, irá a enviar
             //la solicitud para crear la publicación.
+			const { status, data } = await fetchEndpoint(PUBLISH_PRODUCT_URL);
 
-            getJSONData(PUBLISH_PRODUCT_URL).then(function(resultObj){
-                let msgToShowHTML = document.getElementById("resultSpan");
-                let msgToShow = "";
-    
-                //Si la publicación fue exitosa, devolverá mensaje de éxito,
-                //de lo contrario, devolverá mensaje de error.
-                //FUNCIONALIDAD NO IMPLEMENTADA
-                if (resultObj.status === 'ok')
-                {
-                    msgToShow = MSG;
-                    document.getElementById("alertResult").classList.add('alert-primary');
-                }
-                else if (resultObj.status === 'error')
-                {
-                    msgToShow = MSG;
-                    document.getElementById("alertResult").classList.add('alert-primary');
-                }
-    
-                msgToShowHTML.innerHTML = msgToShow;
-                document.getElementById("alertResult").classList.add("show");
-            });
+			let msgToShowHTML = document.getElementById("resultSpan");
+			let msgToShow = "";
+
+			//Si la publicación fue exitosa, devolverá mensaje de éxito,
+			//de lo contrario, devolverá mensaje de error.
+			//FUNCIONALIDAD NO IMPLEMENTADA
+			if(status === 'ok'){
+				msgToShow = MSG;
+				document.getElementById("alertResult").classList.add('alert-primary');
+			}else{
+				msgToShow = MSG;
+				document.getElementById("alertResult").classList.add('alert-primary');
+			}
+
+			msgToShowHTML.innerHTML = msgToShow;
+			document.getElementById("alertResult").classList.add("show");
         }
     });
 });
