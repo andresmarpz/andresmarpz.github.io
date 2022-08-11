@@ -17,23 +17,23 @@ let hideSpinner = function () {
 
 const fetchEndpoint = async (url) => {
     showSpinner();
-    
-	return await fetch(url)
-		.then(response => {
-			if(response.ok) return response.json()
-			else throw Error(response.statusText);
-		})
-		.then(response => {
-			return {
-				status: 'ok',
-				data: response
-			}
-		})
-		.catch(error => {
-			return {
-				status: 'error',
-				data: error
-			}
-		})
-		.finally(hideSpinner)
+	
+    return await fetch(url)
+        .then((response) => {
+            if (response.ok) return response.json();
+            else throw Error(response.statusText);
+        })
+        .then((response) => {
+            return {
+                status: 'ok',
+                data: response
+            };
+        })
+        .catch((error) => {
+            return {
+                status: 'error',
+                data: error
+            };
+        })
+        .finally(hideSpinner);
 };
