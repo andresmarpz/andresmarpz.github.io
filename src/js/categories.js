@@ -99,8 +99,8 @@ function sortAndShowCategories(sortCriteria, categoriesArray) {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener('DOMContentLoaded', async (event) => {
-    const { status, data } = await fetchEndpoint(CATEGORIES_URL);
-    if (status === 'ok') {
+    const { ok, data } = await fetchEndpoint(CATEGORIES_URL);
+    if (ok) {
         currentCategoriesArray = data;
         showCategoriesList();
     }

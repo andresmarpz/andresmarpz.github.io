@@ -15,6 +15,11 @@ let hideSpinner = function () {
     document.getElementById('spinner-wrapper').style.display = 'none';
 };
 
+/**
+ * 
+ * @param {string} url 
+ * @returns
+ */
 const fetchEndpoint = async (url) => {
     showSpinner();
 	
@@ -25,13 +30,13 @@ const fetchEndpoint = async (url) => {
         })
         .then((response) => {
             return {
-                status: 'ok',
+                ok: true,
                 data: response
             };
         })
         .catch((error) => {
             return {
-                status: 'error',
+                ok: false,
                 data: error
             };
         })

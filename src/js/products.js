@@ -1,13 +1,15 @@
 const fetchProducts = async (category = 101) => {
-    const prods = await fetch(`https://japceibal.github.io/emercado-api/cats_products/${category}.json`);
-    if (prods.ok) return await prods.json();
-    else return undefined;
+	return await fetchEndpoint(`${PRODUCTS_URL}${category}.json`);
 };
 
 const setupProducts = async () => {
-    const { products } = await fetchProducts('101');
+    const categoryId = localStorage.getItem('catID');
+    const { data: { catName, products } } = await fetchProducts(categoryId);
+	
     const container = document.getElementById('prodList');
-    container.innerHTML = products
+    if (!products.length) return (container.innerHTML = `<div>No hay productos para esta categoría.</div>`);
+
+	container.innerHTML = products
         .map(
             (prod) => `
 			<div class="list-group-item list-group-item-action cursor-active">
@@ -24,9 +26,8 @@ const setupProducts = async () => {
                     </div>
                 </div>
             </div>
-	`
-        )
-        .join('');
+	`).join('');
+	document.getElementById('prod-cat').innerHTML = catName;
 };
 
-setupProducts();
+document.addEventListener('DOMContentLoaded', setupProducts);
