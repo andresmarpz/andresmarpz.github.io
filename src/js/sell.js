@@ -1,14 +1,3 @@
-let productCost = 0;
-let productCount = 0;
-let comissionPercentage = 0.13;
-let MONEY_SYMBOL = "$";
-let DOLLAR_CURRENCY = "Dólares (USD)";
-let PESO_CURRENCY = "Pesos Uruguayos (UYU)";
-let DOLLAR_SYMBOL = "USD ";
-let PESO_SYMBOL = "UYU ";
-let PERCENTAGE_SYMBOL = '%';
-let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
-
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts(){
     let unitProductCostHTML = document.getElementById("productCostText");
@@ -27,8 +16,8 @@ function updateTotalCosts(){
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
-    document.getElementById("productCountInput").addEventListener("change", function(){
+(async function () {
+	document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;
         updateTotalCosts();
     });
@@ -72,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         url:"/",
         autoQueue: false
     };
-    let myDropzone = new Dropzone("div#file-upload", dzoptions);    
+    let myDropzone = new Dropzone("div#file-upload", dzoptions);
 
 
     //Se obtiene el formulario de publicación de producto
@@ -80,10 +69,9 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     //Se agrega una escucha en el evento 'submit' que será
     //lanzado por el formulario cuando se seleccione 'Vender'.
-    sellForm.addEventListener("submit", function(e){
+    sellForm.addEventListener("submit", async function(e){
 
         e.preventDefault(); 
-        e.preventDefault();
 
         let productNameInput = document.getElementById("productName");
         let productCategory = document.getElementById("productCategory");
@@ -122,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             //Aquí ingresa si pasó los controles, irá a enviar
             //la solicitud para crear la publicación.
-			const { ok, data } = await fetchEndpoint(PUBLISH_PRODUCT_URL);
+			const { ok } = await fetchEndpoint(PUBLISH_PRODUCT_URL);
 
 			let msgToShowHTML = document.getElementById("resultSpan");
 			let msgToShow = "";
@@ -142,4 +130,4 @@ document.addEventListener("DOMContentLoaded", function(e){
 			document.getElementById("alertResult").classList.add("show");
         }
     });
-});
+})();

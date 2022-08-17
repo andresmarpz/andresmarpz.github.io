@@ -1,8 +1,8 @@
-const fetchProducts = async (category = 101) => {
+async function fetchProducts(category = 101){
 	return await fetchEndpoint(`${PRODUCTS_URL}${category}.json`);
 };
 
-const setupProducts = async () => {
+async function setupProducts(){
     const categoryId = localStorage.getItem('catID');
     const { data: { catName, products } } = await fetchProducts(categoryId);
 	
@@ -28,4 +28,4 @@ const setupProducts = async () => {
 	document.getElementById('prod-cat').innerHTML = catName;
 };
 
-document.addEventListener('DOMContentLoaded', setupProducts);
+setupProducts()

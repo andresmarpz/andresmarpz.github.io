@@ -1,11 +1,3 @@
-const ORDER_ASC_BY_NAME = 'AZ';
-const ORDER_DESC_BY_NAME = 'ZA';
-const ORDER_BY_PROD_COUNT = 'Cant.';
-let currentCategoriesArray = [];
-let currentSortCriteria = undefined;
-let minCount = undefined;
-let maxCount = undefined;
-
 function sortCategories(criteria, array) {
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME) {
@@ -48,7 +40,7 @@ function sortCategories(criteria, array) {
 
 function setCatID(id) {
     localStorage.setItem('catID', id);
-    window.location = 'products.html';
+    router.loadRoute('products');
 }
 
 function showCategoriesList() {
@@ -60,8 +52,9 @@ function showCategoriesList() {
             (minCount == undefined || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
             (maxCount == undefined || (maxCount != undefined && parseInt(category.productCount) <= maxCount))
         ) {
+            // ${PRODUCTS_URL}${category}.json
             htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setCatID(${category.id})" onmouseenter="fetch('${PRODUCTS_URL}${category.id}.json')" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${getImagePath(category.imgSrc)}" alt="${category.description}" class="img-thumbnail">
@@ -98,8 +91,9 @@ function sortAndShowCategories(sortCriteria, categoriesArray) {
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener('DOMContentLoaded', async (event) => {
+(async function () {
     const { ok, data } = await fetchEndpoint(CATEGORIES_URL);
+
     if (ok) {
         currentCategoriesArray = data;
         showCategoriesList();
@@ -147,4 +141,4 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
         showCategoriesList();
     });
-});
+})();

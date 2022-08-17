@@ -7,22 +7,28 @@ const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
 const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
 const EXT_TYPE = '.json';
 
-let showSpinner = function () {
-    document.getElementById('spinner-wrapper').style.display = 'block';
-};
+// categories.js
+const ORDER_ASC_BY_NAME = 'AZ';
+const ORDER_DESC_BY_NAME = 'ZA';
+const ORDER_BY_PROD_COUNT = 'Cant.';
+let currentCategoriesArray = [];
+let currentSortCriteria = undefined;
+let minCount = undefined;
+let maxCount = undefined;
 
-let hideSpinner = function () {
-    document.getElementById('spinner-wrapper').style.display = 'none';
-};
+// sell.js
+let productCost = 0;
+let productCount = 0;
+let comissionPercentage = 0.13;
+let MONEY_SYMBOL = "$";
+let DOLLAR_CURRENCY = "Dólares (USD)";
+let PESO_CURRENCY = "Pesos Uruguayos (UYU)";
+let DOLLAR_SYMBOL = "USD ";
+let PESO_SYMBOL = "UYU ";
+let PERCENTAGE_SYMBOL = '%';
+let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
-/**
- * 
- * @param {string} url 
- * @returns
- */
 const fetchEndpoint = async (url) => {
-    showSpinner();
-	
     return await fetch(url)
         .then((response) => {
             if (response.ok) return response.json();
@@ -39,10 +45,9 @@ const fetchEndpoint = async (url) => {
                 ok: false,
                 data: error
             };
-        })
-        .finally(hideSpinner);
+        });
 };
 
 const getImagePath = (url = '') => {
-	return url.replace('.jpg', '.webp').replace('.png', '.webp')
-}
+    return url.replace('.jpg', '.webp').replace('.png', '.webp');
+};
