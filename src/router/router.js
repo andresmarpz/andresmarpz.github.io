@@ -23,10 +23,14 @@ class Router {
         // and title arguments, but their values do not really matter here.
         const url = `/${urlSegments.join('/')}`;
         history.pushState({}, '', url);
-
+		
         // Append the template of the matched route to the DOM,
         // inside the element with attribute data-router-outlet.
         const routerOutletElement = document.querySelector('[data-router-outlet]');
+		if(!matchedRoute)
+			return routerOutletElement.innerHTML = `<div>404</div>`;
+			
+		
         const htmlContent = await fetch(matchedRoute.template).then((response) => response.text());
         routerOutletElement.innerHTML = (routerOutletElement, matchedRoute ? htmlContent : `<div>404</div>`);
 
@@ -67,13 +71,27 @@ class Router {
     _loadInitialRoute() {
         // Figure out the path segments for the route which should load initially.
         const pathnameSplit = window.location.pathname.split('/');
-        const pathSegments = pathnameSplit.length > 1 ? pathnameSplit.slice(1) : '';
+        const pathSegments = pathnameSplit.length > 1 ? pathnameSplit.slice(1).join('') : '';
+
         // Load the initial route.
         switch (pathSegments) {
             case 'index.html':
-                this.loadRoute(['']);
+                this.loadRoute('');
+				break;
+			case 'products.html':
+				this.loadRoute('/products');
+				break;
+			case 'categories.html':
+				this.loadRoute('/categories');
+				break;
+			case 'sell.html':
+				this.loadRoute('/sell');
+				break;
+			case 'login.html':
+				this.loadRoute('/login');
+				break;
             default:
-                this.loadRoute(...pathSegments);
+                this.loadRoute(pathSegments);
         }
     }
 }
