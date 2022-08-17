@@ -80,7 +80,7 @@ class Router {
         // Load the initial route.
         switch (pathSegments) {
             case 'index.html':
-                this.redirectTo('');
+                this.loadRoute('');
 				break;
 			case 'products.html':
 				this.redirectTo('/products');
