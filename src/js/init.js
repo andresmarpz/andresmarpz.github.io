@@ -42,3 +42,7 @@ const fetchEndpoint = async (url) => {
         })
         .finally(hideSpinner);
 };
+
+const getImagePath = (url = '') => {
+	return url.replace('.jpg', '.webp').replace('.png', '.webp')
+}

@@ -9,13 +9,11 @@ const setupProducts = async () => {
     const container = document.getElementById('prodList');
     if (!products.length) return (container.innerHTML = `<div>No hay productos para esta categoría.</div>`);
 
-	container.innerHTML = products
-        .map(
-            (prod) => `
+	container.innerHTML = products.map((prod) => `
 			<div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
-                        <img src="${prod.image}" alt="${prod.description}" class="img-thumbnail">
+                        <img src="${getImagePath(prod.image)}" alt="${prod.description}" class="img-thumbnail">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
