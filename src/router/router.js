@@ -14,6 +14,10 @@ class Router {
         });
     }
 
+	redirectTo(url){
+		window.location.href = url;
+	}
+
     async loadRoute(...urlSegments) {
         // Attempt to match the URL to a route.
         const matchedRoute = this._matchUrlToRoute(urlSegments);
@@ -76,19 +80,19 @@ class Router {
         // Load the initial route.
         switch (pathSegments) {
             case 'index.html':
-                this.loadRoute('');
+                this.redirectTo('');
 				break;
 			case 'products.html':
-				this.loadRoute('/products');
+				this.redirectTo('/products');
 				break;
 			case 'categories.html':
-				this.loadRoute('/categories');
+				this.redirectTo('/categories');
 				break;
 			case 'sell.html':
-				this.loadRoute('/sell');
+				this.redirectTo('/sell');
 				break;
 			case 'login.html':
-				this.loadRoute('/login');
+				this.redirectTo('/login');
 				break;
             default:
                 this.loadRoute(pathSegments);
