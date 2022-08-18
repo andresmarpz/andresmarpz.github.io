@@ -9,9 +9,9 @@ async function setupProduct(){
 	const params = Object.fromEntries(urlSearchParams.entries());
 	const id = params.id;
 
-	if (!id) return container.innerHTML = `<div>No se encontró el producto.</div>`;
+	const { data, ok } = await fetchProduct(id);
+	if (!id || !ok) return container.innerHTML = `<div>No se encontró el producto.</div>`;
 
-	const { data } = await fetchProduct(id);
 	container.innerHTML = `
 		<div>
 			<h1>${data.name}</h1>
