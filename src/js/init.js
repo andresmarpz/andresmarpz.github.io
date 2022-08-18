@@ -67,21 +67,21 @@ const routes = {
         view: '../views/products.html',
         scripts: ['../js/products.js']
     },
-	'/product': {
-		view: '../views/product.html',
-		scripts: ['../js/product-info.js']
-	},
+    '/product': {
+        view: '../views/product.html',
+        scripts: ['../js/product-info.js']
+    },
     '/sell': {
         view: '../views/sell.html',
         scripts: ['../js/dropzone.js', '../js/sell.js']
     },
-	'/login': {
-		view: '../views/login.html',
-		scripts: ['../js/login.js']
-	},
-	'/404': {
-		view: '../views/404.html'
-	}
+    '/login': {
+        view: '../views/login.html',
+        scripts: ['../js/login.js']
+    },
+    '/404': {
+        view: '../views/404.html'
+    }
 };
 
 const render = async (path) => {
@@ -89,10 +89,10 @@ const render = async (path) => {
     const route = routes[path];
     if (!route.rendered) {
         const content = await fetch(route.view).then((response) => response.text());
-		routes[path].rendered = true;
-		routes[path].view = content;
+        routes[path].rendered = true;
+        routes[path].view = content;
         container.innerHTML = content;
-    }else container.innerHTML = route.view;
+    } else container.innerHTML = route.view;
 
     if (route.scripts) {
         for (let script of route.scripts) {
@@ -106,7 +106,23 @@ const render = async (path) => {
 };
 
 const router = new Navigo('/');
-router.on({
+router.hooks({
+    before: (done, match) => {
+		if(match.url === 'login'){
+			if(localStorage.getItem('profile')){
+				done(false);
+				router.navigate('/');
+			}else done();
+		}else{
+			if(!localStorage.getItem('profile')) {
+				done(false);
+				router.navigate('/login');
+			}else done();
+		}
+	}
+});
+router
+    .on({
         '': () => {
             render('/');
         },
@@ -114,34 +130,42 @@ router.on({
             render('/categories');
         },
         '/products': () => {
-			render('/products');
-		},
+            render('/products');
+        },
         '/product': () => {
-			render('/product');
-		},
+            render('/product');
+        },
         '/cart': () => {},
         '/sell': () => {
             render('/sell');
         },
         '/login': () => {
-            render('/login');
-        },
-		// redirects for people using the old URL structure
+			render('/login');
+		},
+        // redirects for people using the old URL structure
         '/index.html': () => {
             router.navigate('');
         },
         '/categories.html': () => {
-			router.navigate('/categories');
-		},
+            router.navigate('/categories');
+        },
         '/products.html': () => {
-			router.navigate('/products');
-		},
-		'/sell.html': () => {
-			router.navigate('/sell');
-		},
-		'/login.html': () => {
-			router.navigate('/login');
-		}
-}).notFound(() => {
-	render('/404');
-}).resolve();
+            router.navigate('/products');
+        },
+        '/sell.html': () => {
+            router.navigate('/sell');
+        },
+        '/login.html': () => {
+            router.navigate('/login');
+        }
+    })
+    .notFound(() => {
+        render('/404');
+    })
+    .resolve();
+
+router.addLeaveHook('/login', (done) => {
+	if(!localStorage.getItem('profile')) 
+		done(false);
+	else done();
+})
