@@ -10,7 +10,7 @@ async function setupProducts(){
     if (!products.length) return (container.innerHTML = `<div>No hay productos para esta categoría.</div>`);
 
 	container.innerHTML = products.map((prod) => `
-			<div class="list-group-item list-group-item-action cursor-active">
+			<div class="list-group-item list-group-item-action cursor-active" onclick="router.navigate('/product?id=${prod.id}')">
                 <div class="row">
                     <div class="col-3">
                         <img src="${getImagePath(prod.image)}" alt="${prod.description}" class="img-thumbnail">

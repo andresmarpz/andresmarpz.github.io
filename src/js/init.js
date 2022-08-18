@@ -55,7 +55,6 @@ const getImagePath = (url = '') => {
 /**
  * Create a Navigo router and configure it
  */
-
 const routes = {
     '/': {
         view: '../views/home.html'
@@ -68,10 +67,18 @@ const routes = {
         view: '../views/products.html',
         scripts: ['../js/products.js']
     },
+	'/product': {
+		view: '../views/product.html',
+		scripts: ['../js/product-info.js']
+	},
     '/sell': {
         view: '../views/sell.html',
         scripts: ['../js/dropzone.js', '../js/sell.js']
-    }
+    },
+	'/login': {
+		view: '../views/login.html',
+		scripts: ['../js/login.js']
+	}
 };
 
 const render = async (path) => {
@@ -106,7 +113,9 @@ router.on({
         '/products': () => {
 			render('/products');
 		},
-        '/product/:id': (params) => {},
+        '/product': () => {
+			render('/product');
+		},
         '/cart': () => {},
         '/sell': () => {
             render('/sell');
@@ -114,9 +123,20 @@ router.on({
         '/login': () => {
             render('/login');
         },
+		// redirects for people using the old URL structure
         '/index.html': () => {
             router.navigate('');
         },
-        '/categories.html': () => {},
-        '/products.html': () => {}
+        '/categories.html': () => {
+			router.navigate('/categories');
+		},
+        '/products.html': () => {
+			router.navigate('/products');
+		},
+		'/sell.html': () => {
+			router.navigate('/sell');
+		},
+		'/login.html': () => {
+			router.navigate('/login');
+		}
 }).resolve();
