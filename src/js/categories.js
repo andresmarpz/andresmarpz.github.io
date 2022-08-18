@@ -40,7 +40,7 @@ function sortCategories(criteria, array) {
 
 function setCatID(id) {
     localStorage.setItem('catID', id);
-    router.loadRoute('products');
+    router.navigate('/products');
 }
 
 function showCategoriesList() {

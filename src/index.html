@@ -42,20 +42,20 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav w-100 justify-content-between">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/" data-router-link>Inicio</a>
+                            <a class="nav-link active" href="/" data-navigo>Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/categories" data-router-link>Categorías</a>
+                            <a class="nav-link" href="/categories" data-navigo>Categorías</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/sell" data-router-link>Vender</a>
+                            <a class="nav-link" href="/sell" data-navigo>Vender</a>
                         </li>
                         <li class="nav-item"></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <main data-router-outlet></main>
+        <main navigo-container></main>
         <footer class="text-muted">
             <div class="container">
                 <p class="float-end">
@@ -68,10 +68,8 @@
                 <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
             </div>
         </footer>
+		<script src="//unpkg.com/navigo"></script>
 		<script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/init.js"></script>
-        <script src="router/router.js"></script>
-        <script src="router/routes.js"></script>
-		<script>const router = new Router(routes);</script>
     </body>
 </html>
