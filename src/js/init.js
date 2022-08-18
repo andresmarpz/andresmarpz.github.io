@@ -78,6 +78,9 @@ const routes = {
 	'/login': {
 		view: '../views/login.html',
 		scripts: ['../js/login.js']
+	},
+	'/404': {
+		view: '../views/404.html'
 	}
 };
 
@@ -139,4 +142,6 @@ router.on({
 		'/login.html': () => {
 			router.navigate('/login');
 		}
+}).notFound(() => {
+	render('/404');
 }).resolve();
