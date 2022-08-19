@@ -11,5 +11,5 @@ document.getElementById('login-form').addEventListener('submit', (event) => {
 	const username = { email, password };
 	localStorage.setItem('profile', JSON.stringify(username));
 
-	router.navigate('');
+	router.navigate(localStorage.getItem('lastUrl') || '/');
 })
