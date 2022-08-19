@@ -84,7 +84,7 @@ const routes = {
     }
 };
 
-const render = async (path, header = true) => {
+const render = async (path) => {
     const container = document.querySelector('[navigo-container]');
     const route = routes[path];
     if (!route.rendered) {
