@@ -84,16 +84,16 @@ const routes = {
     }
 };
 
-const render = async (path) => {
+const render = async (path, header = true) => {
     const container = document.querySelector('[navigo-container]');
     const route = routes[path];
     if (!route.rendered) {
-        const content = await fetch(route.view).then((response) => response.text());
+		const content = await fetch(route.view).then((response) => response.text());
         routes[path].rendered = true;
         routes[path].view = content;
         container.innerHTML = content;
     } else container.innerHTML = route.view;
-
+	
     if (route.scripts) {
         for (let script of route.scripts) {
             const scriptElement = document.createElement('script');
@@ -140,7 +140,8 @@ router
             render('/sell');
         },
         '/login': () => {
-			render('/login');
+			render('/login', false);
+			document.getElementById('navbar').style.display = 'none';
 		},
         // redirects for people using the old URL structure
         '/index.html': () => {
@@ -167,5 +168,8 @@ router
 router.addLeaveHook('/login', (done) => {
 	if(!localStorage.getItem('profile')) 
 		done(false);
-	else done();
+	else{ 
+		document.getElementById('navbar').style.display = 'block';
+		done()
+	};
 })
