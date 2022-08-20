@@ -57,7 +57,7 @@ function showCategoriesList() {
             <div onclick="setCatID(${category.id})" onmouseenter="fetch('${PRODUCTS_URL}${category.id}.json')" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
-                        <img src="${getImagePath(category.imgSrc)}" alt="${category.description}" class="img-thumbnail">
+                        <img src="${getImagePath(category.imgSrc)}" alt="${category.description}" class="img-thumbnail" style="padding: 0 !important;">
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
