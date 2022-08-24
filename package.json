@@ -1,0 +1,23 @@
+{
+  "name": "andresmarpz.github.io",
+  "version": "1.0.0",
+  "description": "Este es el proyecto del curso Jóvenes a Programar de Plan Ceibal Uruguay.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "http-server-spa src ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andresmarpz/andresmarpz.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andresmarpz/andresmarpz.github.io/issues"
+  },
+  "homepage": "https://github.com/andresmarpz/andresmarpz.github.io#readme",
+  "dependencies": {
+    "http-server-spa": "^1.3.0"
+  }
+}
