@@ -16,6 +16,14 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+// products.js
+let productsArray = [];
+const ORDER_ASC_BY_COST = 'costUp';
+const ORDER_DESC_BY_COST = 'costDown';
+const ORDER_BY_SOLD_COUNT = 'soldCount';
+let minCountProds = undefined;
+let maxCountProds = undefined;
+
 // sell.js
 let productCost = 0;
 let productCount = 0;
