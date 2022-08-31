@@ -111,6 +111,12 @@ const render = async (path) => {
             container.appendChild(scriptElement);
         }
     }
+
+    const user = document.getElementById('dropdownMenuButton');
+    if (user && localStorage.getItem('profile')) {
+        const profile = JSON.parse(localStorage.getItem('profile'));
+        user.innerHTML = profile.email;
+    }
 };
 
 const router = new Navigo('/');
@@ -124,11 +130,11 @@ router.hooks({
         } else {
             if (!localStorage.getItem('profile')) {
                 done(false);
-				localStorage.setItem('lastUrl', match.url + (match.queryString ? '?' + match.queryString : ''));
+                localStorage.setItem('lastUrl', match.url + (match.queryString ? '?' + match.queryString : ''));
                 router.navigate('/login');
             } else done();
         }
-    },
+    }
 });
 router
     .on({
@@ -148,9 +154,9 @@ router
         '/sell': () => {
             render('/sell');
         },
-        '/login': async() => {
+        '/login': async () => {
             await render('/login', false);
-            if(document.getElementById('navbar')) document.getElementById('navbar').style.display = 'none';
+            if (document.getElementById('navbar')) document.getElementById('navbar').style.display = 'none';
         },
         // redirects for people using the old URL structure
         '/index.html': () => {
@@ -177,7 +183,12 @@ router
 router.addLeaveHook('/login', (done) => {
     if (!localStorage.getItem('profile')) done(false);
     else {
-        if(document.getElementById('navbar')) document.getElementById('navbar').style.display = 'block';
+        if (document.getElementById('navbar')) document.getElementById('navbar').style.display = 'block';
         done();
     }
 });
+
+const salir = () => {
+    localStorage.removeItem('profile');
+    router.navigate('/login');
+};

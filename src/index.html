@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>eMercado - Todo lo que busques está aquí</title>
-
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		
         <link
             href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
             rel="stylesheet" />
@@ -41,7 +44,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav w-100 justify-content-between">
+                    <ul class="navbar-nav w-100 justify-content-between" style="align-items: center; padding: 4px 0;">
                         <li class="nav-item">
                             <a class="nav-link active" href="/" data-navigo>Inicio</a>
                         </li>
@@ -52,8 +55,27 @@
                             <a class="nav-link" href="/sell" data-navigo>Vender</a>
                         </li>
                         <li class="nav-item">
-							
-						</li>
+                            <div class="dropdown">
+								<button
+								class="btn btn-secondary dropdown-toggle"
+								type="button"
+								id="dropdownMenuButton"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">
+								Log in
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="/profile" data-navigo id="nav-user">
+										Mi perfil
+									</a>
+									<div class="dropdown-divider"></div>
+									<button class="dropdown-item btn-danger" onclick="salir()">
+										Salir
+									</button>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -71,9 +93,8 @@
                 <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
             </div>
         </footer>
-		<script src="js/components.js"></script>
+        <script src="js/components.js"></script>
         <script src="//unpkg.com/navigo"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/init.js"></script>
     </body>
 </html>
