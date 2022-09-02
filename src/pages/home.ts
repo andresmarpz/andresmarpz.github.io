@@ -1,7 +1,7 @@
 import { Page } from "../types";
 
 const Home: Page = async () => {
-	return 'awdawdwad';
+	return '<h1>Home</h1>';
 }
 
 export default Home;
