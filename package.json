@@ -1,27 +1,27 @@
 {
-  "name": "andresmarpz.github.io",
-  "version": "1.0.0",
-  "description": "Este es el proyecto del curso Jóvenes a Programar de Plan Ceibal Uruguay.",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite src",
-    "build": "tsc && vite build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/andresmarpz/andresmarpz.github.io.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/andresmarpz/andresmarpz.github.io/issues"
-  },
-  "homepage": "https://github.com/andresmarpz/andresmarpz.github.io#readme",
-  "devDependencies": {
-    "typescript": "^4.8.2",
-    "vite": "^3.0.9"
-  },
-  "dependencies": {
-    "navigo": "^8.11.1"
-  }
+    "name": "andresmarpz.github.io",
+    "version": "1.0.0",
+    "description": "Este es el proyecto del curso Jóvenes a Programar de Plan Ceibal Uruguay.",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vite src",
+        "build": "tsc && vite build --emptyOutDir"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/andresmarpz/andresmarpz.github.io.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/andresmarpz/andresmarpz.github.io/issues"
+    },
+    "homepage": "https://github.com/andresmarpz/andresmarpz.github.io#readme",
+    "devDependencies": {
+        "typescript": "^4.8.2",
+        "vite": "^3.0.9"
+    },
+    "dependencies": {
+        "navigo": "^8.11.1"
+    }
 }
