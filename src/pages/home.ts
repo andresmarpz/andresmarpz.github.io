@@ -1,4 +1,7 @@
-export default function Home(path){
-	const container = document.querySelector('[navigo-container]');
-	container.innerHTML = '<h1>Homepage</h1>';
+import { Page } from "../types";
+
+const Home: Page = async () => {
+	return 'awdawdwad';
 }
+
+export default Home;

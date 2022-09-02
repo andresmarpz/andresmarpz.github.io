@@ -11,8 +11,9 @@ export default function createRoutes(){
 	];
 	
 	routes.forEach(({ path, page }) => {
-		router.on(path, () => {
-				page(path);
+		router.on(path, async () => {
+			const container = document.querySelector('[navigo-container]');
+			if(container) container.innerHTML = await page(path);
 		}).resolve();
 	});
 }
