@@ -2,9 +2,14 @@ import Navigo from 'navigo';
 import Categories from './pages/categories';
 import Home from './pages/home';
 import Sell from './pages/sell';
-import { Route } from './types';
+import { Page } from './types';
 
 export const router = new Navigo('/');
+
+export interface Route {
+    path: string;
+    page: Page;
+}
 
 export default function createRoutes(){
 	const routes: Route[] = [
