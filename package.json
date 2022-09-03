@@ -4,8 +4,10 @@
     "description": "Este es el proyecto del curso Jóvenes a Programar de Plan Ceibal Uruguay.",
     "main": "index.js",
     "scripts": {
-        "dev": "vite src",
-        "build": "tsc && vite build --emptyOutDir"
+        "dev": "vite",
+        "build": "tsc && vite build --emptyOutDir",
+        "serve": "vite preview",
+        "preview": "npm run build && vite preview"
     },
     "repository": {
         "type": "git",
@@ -22,6 +24,7 @@
         "vite": "^3.0.9"
     },
     "dependencies": {
+        "bootstrap": "^5.2.0",
         "navigo": "^8.11.1"
     }
 }
