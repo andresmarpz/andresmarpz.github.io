@@ -1,6 +1,7 @@
 import Navigo from 'navigo';
 import Categories from './pages/categories';
 import Home from './pages/home';
+import Products from './pages/products';
 import Sell from './pages/sell';
 import { Page } from './types';
 
@@ -15,6 +16,7 @@ export default function createRoutes(){
 	const routes: Route[] = [
 		{ path: '/', page: Home },
 		{ path: '/categories', page: Categories },
+		{ path: '/products', page: Products },
 		{ path: '/sell', page: Sell }
 	];
 	
