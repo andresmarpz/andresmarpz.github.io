@@ -1,3 +1,3 @@
-import createRoutes from "./router.js";
+import createRoutes from "./router";
 
 createRoutes();

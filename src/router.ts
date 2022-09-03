@@ -1,13 +1,16 @@
 import Navigo from 'navigo';
 import Categories from './pages/categories';
 import Home from './pages/home';
+import Sell from './pages/sell';
+import { Route } from './types';
 
-const router = new Navigo('/');
+export const router = new Navigo('/');
 
 export default function createRoutes(){
-	const routes = [
+	const routes: Route[] = [
 		{ path: '/', page: Home },
-		{ path: '/categories', page: Categories }
+		{ path: '/categories', page: Categories },
+		{ path: '/sell', page: Sell }
 	];
 	
 	routes.forEach(({ path, page }) => {

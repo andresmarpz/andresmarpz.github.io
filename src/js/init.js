@@ -134,7 +134,8 @@ router.hooks({
                 router.navigate('/login');
             } else done();
         }
-    }
+    },
+
 });
 router
     .on({
