@@ -2,6 +2,7 @@ import Navigo from 'navigo';
 import Categories from './pages/categories';
 import Home from './pages/home';
 import Login from './pages/login';
+import Product from './pages/product';
 import Products from './pages/products';
 import Sell from './pages/sell';
 import { Page } from './types';
@@ -20,6 +21,7 @@ export default function createRoutes() {
         { path: '/login', page: Login },
         { path: '/categories', page: Categories },
         { path: '/products', page: Products },
+		{ path: '/product', page: Product },
         { path: '/sell', page: Sell }
     ];
 
