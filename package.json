@@ -20,11 +20,13 @@
     },
     "homepage": "https://github.com/andresmarpz/andresmarpz.github.io#readme",
     "devDependencies": {
+        "@types/dropzone": "^5.7.4",
         "typescript": "^4.8.2",
         "vite": "^3.0.9"
     },
     "dependencies": {
-        "bootstrap": "^5.2.0",
+        "bootstrap": "^4.6.2",
+        "dropzone": "^6.0.0-beta.2",
         "navigo": "^8.11.1"
     }
 }
