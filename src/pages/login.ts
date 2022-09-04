@@ -1,8 +1,7 @@
 import { router } from "../router";
 import { Page } from "../types";
 
-// @ts-ignore
-window.handleLoginSubmit = function handleLoginSubmit(event: Event) {
+(window as any).handleLoginSubmit = function handleLoginSubmit(event: Event) {
 	event.preventDefault();
 
 	const email = (document?.getElementById('user-email-input') as HTMLInputElement)?.value;
