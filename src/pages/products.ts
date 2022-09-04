@@ -2,6 +2,7 @@ import { router } from "../router"
 import { Page } from "../types"
 import { fetchEndpoint, PRODUCTS_URL } from "../util/fetcher"
 import { formatImagePath } from "../util/formatter"
+import addAfterHook from "../util/hooks/addAfter"
 
 interface Product{
 	id: number,
@@ -24,11 +25,96 @@ window.handleProductClick = function handleProductClick(id: number) {
 	router.navigate(`/product?id=${id}`);
 }
 
-const Products: Page = async() => {
-	const categoryId = localStorage.getItem('catID');
-	const { data, ok } = await fetchEndpoint<Response>(PRODUCTS_URL +categoryId +'.json');
+type SortCriteria = 'Asc' | 'Desc' | 'Rel';
+const sortProducts = (criteria: SortCriteria, array: Product[]) => {
+	switch (criteria) {
+		case 'Asc':
+			return array.sort((a, b) => a.cost - b.cost);
+		case 'Desc':
+			return array.sort((a, b) => b.cost - a.cost);
+		case 'Rel':
+			return array.sort((a, b) => b.soldCount - a.soldCount);
+	}
+}
 
-	if(!ok || !data) return `<div>Error al cargar los productos.</div>`
+const updateProducts = (products: Product[]) => {
+	const container = document.getElementById('prodList');
+	if (!container) return;
+
+	if(minPrice !== -1 || maxPrice !== -1) 
+		products = products.filter(prod => {
+			if(minPrice !== -1 && maxPrice !== -1) return prod.cost >= minPrice && prod.cost <= maxPrice;
+			if(minPrice !== -1 && maxPrice === -1) return prod.cost >= minPrice;
+			if(minPrice === -1 && maxPrice !== -1) return prod.cost <= maxPrice;
+			return true;
+		});
+
+	if(!products.length) container.innerHTML = `<h1>No products found</h1>`;
+	else container.innerHTML = products.map(product => `
+		<div class="list-group-item list-group-item-action cursor-active" onclick="handleProductClick(${product.id})">
+			<div class="row">
+				<div class="col-3">
+					<img src="${formatImagePath(product.image)}" alt="${product.description}" class="img-thumbnail">
+				</div>
+				<div class="col">
+					<div class="d-flex w-100 justify-content-between">
+						<h4 class="mb-1">${product.name} - USD ${product.cost}</h4>
+						<small class="text-muted">${product.soldCount} vendidos</small>
+					</div>
+					<p class="mb-1">${product.description}</p>
+				</div>
+			</div>
+		</div>
+	`).join('')
+}
+
+let products: Product[] = [];
+let minPrice = -1, maxPrice = -1;
+
+const Products: Page = async(path) => {
+	addAfterHook(path, async() => {
+		const categoryId = localStorage.getItem('catID');
+		const { data } = await fetchEndpoint<Response>(PRODUCTS_URL +categoryId +'.json');
+		products = data.products;
+
+		updateProducts(products)
+
+		document.getElementById('sortAsc')!.addEventListener('click', function () {
+			updateProducts(sortProducts('Asc', products));
+		});
+	
+		document.getElementById('sortDesc')!.addEventListener('click', function () {
+			updateProducts(sortProducts('Desc', products));
+		});
+	
+		document.getElementById('sortByCount')!.addEventListener('click', function () {
+			updateProducts(sortProducts('Rel', products));
+		});
+
+		document.getElementById('clearRangeFilter')!.addEventListener('click', function () {
+			const min = document.getElementById('rangeFilterCountMin') as HTMLInputElement;
+			const max = document.getElementById('rangeFilterCountMax') as HTMLInputElement;			
+			min.value = ''; max.value = '';
+			minPrice = -1, maxPrice = -1;
+	
+			updateProducts(products);
+		});
+	
+		document.getElementById('rangeFilterCount')!.addEventListener('click', function () {
+			//Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+			//de productos por categoría.
+			const min = document.getElementById('rangeFilterCountMin') as HTMLInputElement;
+			const max = document.getElementById('rangeFilterCountMax') as HTMLInputElement;
+			
+			if(min.value && parseInt(min.value) >= 0) minPrice = parseInt(min.value);
+			else minPrice = -1;
+
+			if(max.value && parseInt(max.value) >= 0) maxPrice = parseInt(max.value);
+			else maxPrice = -1;
+	
+			updateProducts(products);
+		});
+	});
 
 	return `
 		<div class="container text-center p-4">
@@ -69,24 +155,6 @@ const Products: Page = async() => {
 			</div>
 		</div>
 		<div id="prodList" class="container">
-			${ data.products.length 
-				? data.products.map(product => `
-					<div class="list-group-item list-group-item-action cursor-active" onclick="handleProductClick(${product.id})">
-						<div class="row">
-							<div class="col-3">
-								<img src="${formatImagePath(product.image)}" alt="${product.description}" class="img-thumbnail">
-							</div>
-							<div class="col">
-								<div class="d-flex w-100 justify-content-between">
-									<h4 class="mb-1">${product.name} - USD ${product.cost}</h4>
-									<small class="text-muted">${product.soldCount} vendidos</small>
-								</div>
-								<p class="mb-1">${product.description}</p>
-							</div>
-						</div>
-					</div>
-					`).join('') 
-				: `<div class="text-center">No hay productos para mostrar.</div>`}
 		</div>
 	`
 }
