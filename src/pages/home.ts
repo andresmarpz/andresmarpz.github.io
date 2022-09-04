@@ -1,7 +1,26 @@
+import { router } from '../router';
 import { Page } from '../types';
+import addAfterHook from '../util/hooks/addAfter';
 
-const Home: Page = async () => {
-	
+const redirectToProduct = (id: string) => {
+	localStorage.setItem('catID', id);
+	router.navigate(`/products?id=${id}`);
+}
+
+const Home: Page = async (path) => {
+	addAfterHook(path, () => {
+		document.getElementById('autos')?.addEventListener('click', () => {
+			redirectToProduct('101');
+		})
+
+		document.getElementById('juguetes')?.addEventListener('click', () => {
+			redirectToProduct('102');
+		});
+
+		document.getElementById('muebles')?.addEventListener('click', () => {
+			redirectToProduct('103');
+		})
+	})
 
     return `
 		<div class="jumbotron text-center"></div>
@@ -9,7 +28,7 @@ const Home: Page = async () => {
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="card mb-4 shadow-sm custom-card cursor-active" id="autos" onclick="localStorage.setItem('catID', 101); router.navigate('/products');">
+						<div class="card mb-4 shadow-sm custom-card cursor-active" id="autos">
 							<img
 								class="bd-placeholder-img card-img-top"
 								src="img/cars_index.webp"
@@ -21,7 +40,7 @@ const Home: Page = async () => {
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card mb-4 shadow-sm custom-card cursor-active" id="juguetes" onclick="localStorage.setItem('catID', 102); router.navigate('/products');">
+						<div class="card mb-4 shadow-sm custom-card cursor-active" id="juguetes">
 							<img
 								class="bd-placeholder-img card-img-top"
 								src="img/toys_index.webp"
@@ -33,7 +52,7 @@ const Home: Page = async () => {
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="card mb-4 shadow-sm custom-card cursor-active" id="muebles" onclick="localStorage.setItem('catID', 103); router.navigate('/products');">
+						<div class="card mb-4 shadow-sm custom-card cursor-active" id="muebles">
 							<img
 								class="bd-placeholder-img card-img-top"
 								src="img/furniture_index.webp"
