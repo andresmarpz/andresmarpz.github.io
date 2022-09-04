@@ -4,7 +4,7 @@ import { CATEGORIES_URL, fetchEndpoint, PRODUCTS_URL } from '../util/fetcher';
 import { formatImagePath } from '../util/formatter';
 import addAfterHook from '../util/hooks/addAfter';
 
-interface Category {
+export interface Category {
     id: number;
     name: string;
     description: string;
@@ -12,14 +12,13 @@ interface Category {
     imgSrc: string;
 }
 
-// @ts-ignore
-window.handleCategoryClick = function handleCategoryClick(id: number) {
+(window as any).handleCategoryClick = function handleCategoryClick(id: number) {
 	localStorage.setItem('catID', id.toString());
 	router.navigate(`/products?id=${id}`);
 }
 
 type SortCriteria = 'Asc' | 'Desc' | 'PCount';
-const sortCategories = (criteria: SortCriteria, array: Category[]) => {
+export const sortCategories = (criteria: SortCriteria, array: Category[]) => {
 	switch (criteria) {
 		case 'Asc':
 			return array.sort((a, b) => a.name.localeCompare(b.name));

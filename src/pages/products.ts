@@ -4,7 +4,7 @@ import { fetchEndpoint, PRODUCTS_URL } from "../util/fetcher"
 import { formatImagePath } from "../util/formatter"
 import addAfterHook from "../util/hooks/addAfter"
 
-interface Product{
+interface ProductEntry{
 	id: number,
 	name: string,
 	description: string,
@@ -17,16 +17,15 @@ interface Product{
 interface Response{
 	catID: number,
 	catName: string,
-	products: Product[]
+	products: ProductEntry[]
 }
 
-// @ts-ignore
-window.handleProductClick = function handleProductClick(id: number) {
+(window as any).handleProductClick = function handleProductClick(id: number) {
 	router.navigate(`/product?id=${id}`);
 }
 
 type SortCriteria = 'Asc' | 'Desc' | 'Rel';
-const sortProducts = (criteria: SortCriteria, array: Product[]) => {
+const sortProducts = (criteria: SortCriteria, array: ProductEntry[]) => {
 	switch (criteria) {
 		case 'Asc':
 			return array.sort((a, b) => a.cost - b.cost);
@@ -37,7 +36,7 @@ const sortProducts = (criteria: SortCriteria, array: Product[]) => {
 	}
 }
 
-const updateProducts = (products: Product[]) => {
+const updateProducts = (products: ProductEntry[]) => {
 	const container = document.getElementById('prodList');
 	if (!container) return;
 
@@ -68,7 +67,7 @@ const updateProducts = (products: Product[]) => {
 	`).join('')
 }
 
-let products: Product[] = [];
+let products: ProductEntry[] = [];
 let minPrice = -1, maxPrice = -1;
 
 const Products: Page = async(path) => {
