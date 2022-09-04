@@ -2,6 +2,7 @@ import { router } from '../router';
 import { Page } from '../types';
 import { CATEGORIES_URL, fetchEndpoint, PRODUCTS_URL } from '../util/fetcher';
 import { formatImagePath } from '../util/formatter';
+import addAfterHook from '../util/hooks/addAfter';
 
 interface Category {
     id: number;
@@ -17,10 +18,95 @@ window.handleCategoryClick = function handleCategoryClick(id: number) {
 	router.navigate(`/products?id=${id}`);
 }
 
-const Categories: Page = async () => {
-	const { ok, data } = await fetchEndpoint<Category[]>(CATEGORIES_URL);
+type SortCriteria = 'Asc' | 'Desc' | 'PCount';
+const sortCategories = (criteria: SortCriteria, array: Category[]) => {
+	switch (criteria) {
+		case 'Asc':
+			return array.sort((a, b) => a.name.localeCompare(b.name));
+		case 'Desc':
+			return array.sort((a, b) => b.name.localeCompare(a.name));
+		case 'PCount':
+			return array.sort((a, b) => parseInt(b.productCount) - parseInt(a.productCount));
+	}
+}
 
-	if(!ok || !data) return `<div>Error al cargar las categorías.</div>`
+const updateCategories = (categories: Category[]) => {
+	const container = document.getElementById('cat-list-container');
+	if (!container) return;
+
+	if(minCount !== -1 || maxCount !== -1) 
+		categories = categories.filter(cat => {
+			if(minCount !== -1 && maxCount !== -1) return parseInt(cat.productCount) >= minCount && parseInt(cat.productCount) <= maxCount;
+			if(minCount !== -1 && maxCount === -1) return parseInt(cat.productCount) >= minCount;
+			if(minCount === -1 && maxCount !== -1) return parseInt(cat.productCount) <= maxCount;
+			return true;
+		});
+
+	if(!categories.length) container.innerHTML = `<h1>No categories found</h1>`;
+	else container.innerHTML = categories.map(category => `
+		<div onclick="handleCategoryClick(${category.id})" onmouseenter="fetch('${PRODUCTS_URL}${category.id}.json')" class="list-group-item list-group-item-action cursor-active">
+			<div class="row">
+				<div class="col-3">
+					<img src="${formatImagePath(category.imgSrc)}" alt="${category.description}" class="img-thumbnail" style="padding: 0 !important;">
+				</div>
+				<div class="col">
+					<div class="d-flex w-100 justify-content-between">
+						<h4 class="mb-1">${category.name}</h4>
+						<small class="text-muted">${category.productCount} artículos</small>
+					</div>
+					<p class="mb-1">${category.description}</p>
+				</div>
+			</div>
+		</div>
+	`).join('')
+}
+
+let categories: Category[] = [];
+let minCount = -1, maxCount = -1;
+
+const Categories: Page = async (path) => {
+	addAfterHook(path, async() => {
+		const { data } = await fetchEndpoint<Category[]>(CATEGORIES_URL);
+		categories = data;
+
+		updateCategories(categories);
+
+		document.getElementById('sortAsc')!.addEventListener('click', function () {
+			updateCategories(sortCategories('Asc', categories));
+		});
+	
+		document.getElementById('sortDesc')!.addEventListener('click', function () {
+			updateCategories(sortCategories('Desc', categories));
+		});
+	
+		document.getElementById('sortByCount')!.addEventListener('click', function () {
+			updateCategories(sortCategories('PCount', categories));
+		});
+
+		document.getElementById('clearRangeFilter')!.addEventListener('click', function () {
+			const min = document.getElementById('rangeFilterCountMin') as HTMLInputElement;
+			const max = document.getElementById('rangeFilterCountMax') as HTMLInputElement;			
+			min.value = ''; max.value = '';
+			minCount = -1, maxCount = -1;
+	
+			updateCategories(categories);
+		});
+	
+		document.getElementById('rangeFilterCount')!.addEventListener('click', function () {
+			//Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+			//de productos por categoría.
+			const min = document.getElementById('rangeFilterCountMin') as HTMLInputElement;
+			const max = document.getElementById('rangeFilterCountMax') as HTMLInputElement;
+			
+			if(min.value && parseInt(min.value) >= 0) minCount = parseInt(min.value);
+			else minCount = -1;
+
+			if(max.value && parseInt(max.value) >= 0) maxCount = parseInt(max.value);
+			else maxCount = -1;
+	
+			updateCategories(categories);
+		});
+	});
 
     return `
 		<div class="text-center p-4">
@@ -63,22 +149,6 @@ const Categories: Page = async () => {
 			</div>
 			<div class="row">
 				<div class="list-group" id="cat-list-container">
-					${data.map(category => `
-						<div onclick="handleCategoryClick(${category.id})" onmouseenter="fetch('${PRODUCTS_URL}${category.id}.json')" class="list-group-item list-group-item-action cursor-active">
-							<div class="row">
-								<div class="col-3">
-									<img src="${formatImagePath(category.imgSrc)}" alt="${category.description}" class="img-thumbnail" style="padding: 0 !important;">
-								</div>
-								<div class="col">
-									<div class="d-flex w-100 justify-content-between">
-										<h4 class="mb-1">${category.name}</h4>
-										<small class="text-muted">${category.productCount} artículos</small>
-									</div>
-									<p class="mb-1">${category.description}</p>
-								</div>
-							</div>
-						</div>
-					`).join('')}
 				</div>
 			</div>
 		</div>
