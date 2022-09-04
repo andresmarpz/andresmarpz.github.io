@@ -1,10 +1,8 @@
-import { router } from '../../router';
 import { hooks } from '../store';
 
 export default function addAfterHook(path: string, fn: () => void) {
     const { after } = hooks;
-    if (after.includes(path)) return;
+    if (after.find((hook) => hook.path === path)) return;
 
-    after.push(path);
-    router.addAfterHook(path, fn);
+    after.push({ path, fn });
 }

@@ -5,6 +5,7 @@ import Login from './pages/login';
 import Products from './pages/products';
 import Sell from './pages/sell';
 import { Page } from './types';
+import { hooks } from './util/store';
 
 export const router = new Navigo('/');
 
@@ -50,6 +51,12 @@ export default function createRoutes() {
             .on(path, async () => {
                 const container = document.querySelector('[navigo-container]');
                 if (container) container.innerHTML = await page(path);
+
+				// Custom hook running after page load since Navigo's doesn't really
+				// work as expected, calling the after hook before the page is loaded completely
+				const { after } = hooks;
+				const hook = after.find((hook) => hook.path === path);
+				if(hook) hook.fn()
             })
             .resolve();
 	});
