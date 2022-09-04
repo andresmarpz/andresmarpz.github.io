@@ -1,5 +1,5 @@
 // @ts-nocheck
-import '../js/dropzone.js'
+import Dropzone from 'dropzone';
 import { Page } from '../types';
 import addAfterHook from '../util/hooks/addAfter';
 
