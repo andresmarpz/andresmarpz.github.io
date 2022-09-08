@@ -1,0 +1,130 @@
+.add-comment-cnt{
+	user-select: none;
+
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 2px;
+	margin-bottom: 8px;
+}
+
+.add-comment-star{
+	cursor: pointer;
+}
+
+.add-comment-txt{
+	resize: none;
+
+	padding: 8px;
+	border: 1px solid lightgray;
+	border-radius: 4px;
+	margin-bottom: 12px;
+}
+
+.add-comment-btn{
+	color: white;
+	padding: 4px 12px;
+	border-radius: 4px;
+	background-color: black;
+}
+
+.product-header{
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.product-title{
+	font-size: 48px;
+	font-weight: 800;
+	letter-spacing: 1px;
+	margin: 0;
+}
+
+.product-tag{
+	background-color: rgb(218, 218, 218);
+	color: white;
+	border-radius: 50px;
+	padding: 4px 12px;
+}
+
+.product-description{
+	color: rgb(80, 80, 80)
+}
+
+.product-gallery{
+	margin-top: 3vh;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.product-image{
+	max-width: 400px;
+	border-radius: 10px;
+}
+
+.product-price-wp{
+	margin-top: 5vh;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.product-price{
+	display: flex;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: 32px;
+}
+
+.product-buy{
+	background-color: black;
+	color: white;
+	border-radius: 7px;
+	padding: 4px 16px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.product-solds{
+	color:rgb(119, 119, 119)
+}
+
+/* Related */
+
+.p-related-cnt{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.p-related{
+	aspect-ratio: 1 / 1;
+	max-width: 200px;
+	text-decoration: none;
+	color: black;
+}
+
+.p-related-img{
+	max-width: 200px;
+	border-radius: 10px;
+}
+
+/* Comments */
+
+.p-comments-cnt{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.p-comment{
+	border: 1px solid rgb(218, 218, 218);
+	padding: 8px;
+	border-radius: 4px;
+}
+
+.p-comment-header{
+	display: flex;
+	justify-content: space-between;
+}
