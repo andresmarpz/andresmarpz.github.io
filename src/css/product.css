@@ -1,3 +1,32 @@
+.add-comment-cnt{
+	user-select: none;
+
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 2px;
+	margin-bottom: 8px;
+}
+
+.add-comment-star{
+	cursor: pointer;
+}
+
+.add-comment-txt{
+	resize: none;
+
+	padding: 8px;
+	border: 1px solid lightgray;
+	border-radius: 4px;
+	margin-bottom: 12px;
+}
+
+.add-comment-btn{
+	color: white;
+	padding: 4px 12px;
+	border-radius: 4px;
+	background-color: black;
+}
+
 .product-header{
 	display: flex;
 	align-items: center;
