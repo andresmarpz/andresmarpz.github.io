@@ -113,9 +113,11 @@ const Product: Page = async (path) => {
 					comments.map((comment) => `
 						<div class='p-comment'>
 							<div class='p-comment-header'>
-								<span class='p-comment-user'>${comment.user}</span>
+								<span>
+									<span class='p-comment-user'>${comment.user}</span>
+									<span>${StarRating(comment.score)}</span>
+								</span>
 								<span class='p-comment-date'>${comment.dateTime}</span>
-								<span>${StarRating(comment.score)}</span>
 							</div>
 							<div class='p-comment-body'>
 								${comment.description}
