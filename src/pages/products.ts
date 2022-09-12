@@ -113,6 +113,12 @@ const Products: Page = async(path) => {
 	
 			updateProducts(products);
 		});
+
+		document.getElementById("productSearch")!.addEventListener('input', (event) => {
+			const value = (event.target as HTMLInputElement).value;
+			updateProducts(products.filter(prod => prod.name.toLowerCase().includes(value.toLowerCase()) 
+			|| prod.description.toLowerCase().includes(value.toLowerCase())));
+		})
 	});
 
 	return `
@@ -151,6 +157,9 @@ const Products: Page = async(path) => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="row">
+				<input class="form-control" type="search" id="productSearch">
 			</div>
 		</div>
 		<div id="prodList" class="container">
