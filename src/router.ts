@@ -1,9 +1,11 @@
 import Navigo from 'navigo';
+import Cart from './pages/cart';
 import Categories from './pages/categories';
 import Home from './pages/home';
 import Login from './pages/login';
 import Product from './pages/product';
 import Products from './pages/products';
+import Profile from './pages/profile';
 import Sell from './pages/sell';
 import { Page } from './types';
 import { hooks } from './util/store';
@@ -22,7 +24,9 @@ export default function createRoutes() {
         { path: '/categories', page: Categories },
         { path: '/products', page: Products },
         { path: '/product', page: Product },
-        { path: '/sell', page: Sell }
+        { path: '/sell', page: Sell },
+				{ path: '/cart', page: Cart },
+				{ path: '/profile', page: Profile }
     ];
 
     router.hooks({
