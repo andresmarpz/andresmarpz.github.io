@@ -3,85 +3,79 @@
  */
 
 import { CartProduct } from '../types';
+import { fetchEndpoint } from './fetcher';
 import { formatImagePath } from './formatter';
 
 interface AfterEntry {
-    path: string;
-    fn: () => void;
+  path: string;
+  fn: () => void;
 }
 
 interface HookStore {
-    after: AfterEntry[];
-    before: string[];
+  after: AfterEntry[];
+  before: string[];
 }
 
 export const hooks: HookStore = {
-    after: [],
-    before: []
+  after: [],
+  before: []
 };
 
 /**
  * Data
  */
 
+async function fetchCart() {
+  return await fetchEndpoint<{
+    user: number;
+    articles: CartProduct[];
+  }>('https://japceibal.github.io/emercado-api/user_cart/25801.json');
+}
 class Store {
-    public cart: ReadonlyArray<CartProduct>;
+  public cart: ReadonlyArray<CartProduct>;
 
-    constructor() {
-        this.cart = [
-            {
-                id: 50924,
-                name: 'Peugeot 208',
-                count: 1,
-                unitCost: 15200,
-                currency: 'USD',
-                image: formatImagePath('img/prod50924_1.jpg')
-            },
-            {
-                id: 50921,
-                name: 'Chevrolet Onix Joy',
-                count: 4,
-                currency: 'USD',
-                unitCost: 13500,
-                image: formatImagePath('img/prod50921_1.jpg')
-            },
-						{
-							id: 50925,
-							name: 'Chevrolet Onix Joy',
-							count: 4,
-							currency: 'USD',
-							unitCost: 13500,
-							image: formatImagePath('img/prod50921_1.jpg')
-					}
-        ];
-    }
+  constructor() {
+    this.cart = [];
 
-    private setCart(prods: CartProduct[]) {
-        this.cart = prods;
+    const persisted = localStorage.getItem('cart');
+    if (persisted) this.cart = JSON.parse(persisted);
+    else {
+      fetchCart().then(({ data }) => {
+        this.setCart(data.articles.map(art => ({
+					...art,
+					image: formatImagePath(art.image),
+				})));
+      });
     }
+  }
 
-    public modifyCount(id: number, count: number) {
-        const newState = this.cart.map((prod) =>
-            prod.id === id
-                ? {
-                      ...prod,
-                      count: count
-                  }
-                : prod
-        );
-        this.setCart(newState);
-    }
+  private setCart(prods: CartProduct[]) {
+    this.cart = prods;
+		localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
 
-    public addProduct(prod: CartProduct) {
-        this.setCart([...this.cart, prod]);
-    }
+  public modifyCount(id: number, count: number) {
+    const newState = this.cart.map((prod) =>
+      prod.id === id
+        ? {
+            ...prod,
+            count: count
+          }
+        : prod
+    );
+    this.setCart(newState);
+  }
 
-    public removeProduct(id: number) {
-        this.setCart(this.cart.filter((prod) => prod.id !== id));
-    }
+  public addProduct(prod: CartProduct) {
+    this.setCart([...this.cart, prod]);
+  }
+
+  public removeProduct(id: number) {
+    this.setCart(this.cart.filter((prod) => prod.id !== id));
+  }
 }
 
 const store = new Store();
 export default function useStore() {
-    return store;
+  return store;
 }
