@@ -47,6 +47,7 @@ html, body {
 	border: 1px solid var(--gray4);
 	border-radius: 6px;
 	max-width: fit-content;
+	height: 100%;
 }
 
 .ci-control{
@@ -68,6 +69,29 @@ html, body {
 	font-family: monospace;
 	color: var(--gray11);
 	padding: 0 4px;
+}
+
+.ci-borrar{
+	border: 1px solid var(--gray3);
+	border-radius: 6px;
+	padding: 2.5px 4px;
+	color: var(--gray10);
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background-color: white;
+}
+
+.ci-borrar:hover{
+	background-color: var(--gray2);
+}
+
+.mon-btn{
+	border: none;
+	background-color: var(--gray2);
+	padding: 6px 12px;
+	transition: all 0.2s ease;
 }
 
 .dy-cnt{
