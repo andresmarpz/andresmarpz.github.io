@@ -1,7 +1,7 @@
 import { Page } from '../types';
-import { fetchEndpoint, PRODUCT_INFO_COMMENTS_URL, PRODUCT_INFO_URL } from '../util/fetcher';
-import { formatImagePath } from '../util/formatter';
-import addAfterHook from '../util/hooks/addAfter';
+import { fetchEndpoint, PRODUCT_INFO_COMMENTS_URL, PRODUCT_INFO_URL } from '../lib/fetcher';
+import { formatImagePath } from '../lib/formatter';
+import addAfterHook from '../lib/hooks/addAfter';
 
 import '../css/product.css';
 

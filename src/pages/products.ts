@@ -1,8 +1,8 @@
 import { router } from "../router"
 import { Page } from "../types"
-import { fetchEndpoint, PRODUCTS_URL } from "../util/fetcher"
-import { formatImagePath } from "../util/formatter"
-import addAfterHook from "../util/hooks/addAfter"
+import { fetchEndpoint, PRODUCTS_URL } from "../lib/fetcher"
+import { formatImagePath } from "../lib/formatter"
+import addAfterHook from "../lib/hooks/addAfter"
 
 interface ProductEntry{
 	id: number,
