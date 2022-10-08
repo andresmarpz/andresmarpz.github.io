@@ -5,6 +5,6 @@ export type CartProduct = {
 	name: string,
 	count: number,
 	unitCost: number,
-	currency: "USD",
+	currency: "USD" | "UYU",
 	image: string
 }

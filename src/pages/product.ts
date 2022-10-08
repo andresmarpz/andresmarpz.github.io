@@ -4,6 +4,7 @@ import { formatImagePath } from '../lib/formatter';
 import addAfterHook from '../lib/hooks/addAfter';
 
 import '../css/product.css';
+import useStore from '../lib/store';
 
 interface RelatedProduct {
     id: number;
@@ -119,13 +120,12 @@ const AddComment: (productId: number) => string = (pId) => {
 const Product: Page = async (path) => {
 	addAfterHook(path, async () => {
 		const container = document.getElementById('prod-container');
-
         const urlSearchParams = new URLSearchParams(window.location.search);
         const id = urlSearchParams.get('id');
 
         const { data: product, ok } = await fetchEndpoint<ProductInfo>(PRODUCT_INFO_URL + id + '.json');
         const { data: commentsData } = await fetchEndpoint<Comment[]>(PRODUCT_INFO_COMMENTS_URL + id + '.json');
-		comments = commentsData;
+				comments = commentsData;
         if (!container) return;
         if (!product || !ok) container!.innerHTML = `<h1>Product not found</h1>`;
         else
@@ -142,7 +142,7 @@ const Product: Page = async (path) => {
 				</div>
 				<div class='product-price-wp'>
 					<span class='product-price'>$${product.cost} </span>
-					<span><button class='product-buy'>Comprar <span>→</span></button></span>
+					<span><button class='product-buy' id='buy-btn'>Comprar <span>→</span></button></span>
 				</div>
 				<div class='product-solds'>
 					${product.soldCount} vendidos
@@ -172,10 +172,35 @@ const Product: Page = async (path) => {
 					</div>
 				</div>
 			`;
+
+			setTimeout(() => {
+				const buyBtn = document.getElementById('buy-btn');
+				if(!buyBtn) return;
+				buyBtn.addEventListener('click', () => {
+					const store = useStore();
+					store.addProduct({
+						id: product.id,
+						name: product.name,
+						image: formatImagePath(product.images[0]),
+						unitCost: product.cost,
+						count: 1,
+						currency: product.currency
+					});
+					document.getElementById('alert-container')!.innerHTML = `
+						<div id='alert-add' class="alert alert-success alert-dismissible fade show" role="alert">
+							<span>El producto fue agregado al carrito.</span>
+						</div>
+					`
+					setTimeout(() => {
+						document.getElementById('alert-container')!.innerHTML = '';
+					}, 2000)
+				});
+			}, 1)
     });
 
     return `
 		<div class="container py-4">
+			<div id='alert-container'></div>
 			<div id="prod-container" class='product-container'>
 				Loading..
 			</div>
