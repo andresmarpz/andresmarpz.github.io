@@ -8,7 +8,7 @@ import Products from './pages/products';
 import Profile from './pages/profile';
 import Sell from './pages/sell';
 import { Page } from './types';
-import { hooks } from './util/store';
+import { hooks } from './lib/store';
 
 export const router = new Navigo('/');
 

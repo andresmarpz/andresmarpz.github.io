@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Dropzone from 'dropzone';
 import { Page } from '../types';
-import addAfterHook from '../util/hooks/addAfter';
+import addAfterHook from '../lib/hooks/addAfter';
 
 let productCost = 0;
 let productCount = 0;

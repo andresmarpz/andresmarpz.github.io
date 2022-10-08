@@ -1,6 +1,6 @@
 import { router } from '../router';
 import { Page } from '../types';
-import addAfterHook from '../util/hooks/addAfter';
+import addAfterHook from '../lib/hooks/addAfter';
 
 const redirectToProduct = (id: string) => {
 	localStorage.setItem('catID', id);

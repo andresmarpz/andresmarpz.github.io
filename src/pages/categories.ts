@@ -1,8 +1,8 @@
 import { router } from '../router';
 import { Page } from '../types';
-import { CATEGORIES_URL, fetchEndpoint, PRODUCTS_URL } from '../util/fetcher';
-import { formatImagePath } from '../util/formatter';
-import addAfterHook from '../util/hooks/addAfter';
+import { CATEGORIES_URL, fetchEndpoint, PRODUCTS_URL } from '../lib/fetcher';
+import { formatImagePath } from '../lib/formatter';
+import addAfterHook from '../lib/hooks/addAfter';
 
 export interface Category {
     id: number;

@@ -1,0 +1,161 @@
+html, body {
+	font-family: "Inter", Arial, Helvetica, sans-serif;
+	font-style: normal;
+}
+
+.cart-separator{
+	height: 1px;
+	color: var(--gray8);
+	margin: 0;
+}
+
+.cart-title{
+	font-weight: 500;
+	letter-spacing: 0px;
+}
+
+.cart-cnt{
+	border: 1px solid var(--gray3);
+	border-radius: 6px;
+}
+
+.ci-img{
+	max-width: 35%;
+}
+
+.ci-name{
+	color: var(--gray12);
+	font-weight: 600;
+	font-size: 17px;
+}
+
+.ci-price{
+	color: var(--gray12);
+	font-weight: 500;
+	font-size: 16px;
+}
+
+.ci-sub{
+	color: var(--gray10);
+	font-size: 14px;
+}
+
+.ci-count-cnt{
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	border: 1px solid var(--gray4);
+	border-radius: 6px;
+	max-width: fit-content;
+	height: 100%;
+}
+
+.ci-control{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background-color: transparent;
+	color: var(--gray10);
+	min-width: 32px;
+	font-family: monospace;
+}
+
+.ci-control:hover{
+	background-color: var(--gray2);
+}
+
+.ci-count{
+	font-family: monospace;
+	color: var(--gray11);
+	padding: 0 4px;
+}
+
+.ci-borrar{
+	border: 1px solid var(--gray3);
+	border-radius: 6px;
+	padding: 2.5px 4px;
+	color: var(--gray10);
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background-color: white;
+}
+
+.ci-borrar:hover{
+	background-color: var(--gray2);
+}
+
+.mon-btn{
+	border: none;
+	background-color: var(--gray2);
+	padding: 6px 12px;
+	transition: all 0.2s ease;
+}
+
+.dy-cnt{
+	border: 1px solid var(--gray5);
+	border-radius: 9px;
+	background-color: var(--gray2);
+	width: max-content;
+	padding: 1px;
+}
+
+.dy-btn{
+	border: none;
+	background-color: var(--gray2);
+	padding: 6px 12px;
+	transition: all 0.2s ease;
+}
+
+.dy-btn:first-child{
+	border-radius: 8px 0 0 8px;
+}
+
+.dy-btn:last-child{
+	border-radius: 0 8px 8px 0;
+}
+
+.dy-selected{
+	border-radius: 8px !important;
+	background-color: white;
+	/* simple box shadow */
+	box-shadow: hsl(0deg 0% 0% / 7%) 0px 2px 4px 2px;
+	z-index: 2;
+}
+
+.dy-date{
+	color: var(--gray10);
+}
+
+.dy-subtotal{
+	color: var(--gray12);
+	font-weight: 500;
+}
+
+.dy-envio{
+	color: var(--gray10);
+}
+
+.dy-total{
+	color: var(--gray12);
+	font-weight: 600;
+}
+
+.ch-btn-fin{
+	border: none;
+	border-radius: 8px;
+	background-color: rgb(8, 123, 255);
+	color: white;
+	padding: 6px 24px;
+	box-shadow: hsl(0deg 0% 0% / 10%) 0px 2px 4px 1px;
+}
+
+.ch-btn-back{
+	border: 1px solid var(--gray4);
+	border-radius: 8px;
+	background-color: var(--gray1);
+	padding: 6px 24px;
+	box-shadow: hsl(0deg 0% 0% / 5%) 0px 2px 4px 1px;
+}
