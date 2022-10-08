@@ -67,7 +67,9 @@ class Store {
   }
 
   public addProduct(prod: CartProduct) {
-    this.setCart([...this.cart, prod]);
+		const entry = this.cart.find((p) => p.id === prod.id);
+		if(entry) this.modifyCount(prod.id, entry.count + 1);
+		else this.setCart([...this.cart, prod]);
   }
 
   public removeProduct(id: number) {
