@@ -1,101 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>eMercado - Todo lo que busques está aquí</title>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>eMercado - Todo lo que busques está aquí</title>
 
-        <link rel="preload" href="/assets/inter.7b37fe23.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-        
-        <link
-            href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-            rel="stylesheet" />
-        
-        
-        
-        
-        
-        <script type="text/javascript">
-            (function (l) {
-                if (l.search[1] === '/') {
-                    var decoded = l.search
-                        .slice(1)
-                        .split('&')
-                        .map(function (s) {
-                            return s.replace(/~and~/g, '&');
-                        })
-                        .join('?');
-                    window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-                }
-            })(window.location);
-        </script>
-      <script type="module" crossorigin src="/assets/index.4ed93ca4.js"></script>
-      <link rel="stylesheet" href="/assets/index.4f878997.css">
-    </head>
+    <link rel="preload" href="/assets/inter.7b37fe23.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+    
+    
+    
+    
+    
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+    <script type="module" crossorigin src="/assets/index.e3bb2634.js"></script>
+    <link rel="stylesheet" href="/assets/index.4f878997.css">
+  </head>
 
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1" id="navbar">
-            <div class="container">
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1" id="navbar">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 justify-content-between" style="align-items: center; padding: 4px 0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/" data-navigo>Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" data-navigo>Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sell" data-navigo>Vender</a>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
                 <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="nav-dropdown-tg"
+                  data-toggle="dropdown"
+                  data-bs-auto-close="true"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+                  Log in
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav w-100 justify-content-between" style="align-items: center; padding: 4px 0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/" data-navigo>Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/categories" data-navigo>Categorías</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/sell" data-navigo>Vender</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button
-                                    class="btn btn-secondary dropdown-toggle"
-                                    type="button"
-                                    id="dropdownMenuButton"
-                                    data-toggle="dropdown"
-                                    data-bs-auto-close="true"
-                                    aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Log in
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/cart" data-navigo id="nav-user"> Carrito </a>
-                                    <a class="dropdown-item" href="/profile" data-navigo id="nav-user"> Mi perfil </a>
-                                    <div class="dropdown-divider"></div>
-                                    <button class="dropdown-item btn-danger" onclick="salir()">Salir</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="dropdown-menu" aria-labelledby="nav-dropdown-tg">
+                  <button class="dropdown-item" id="href-cart">Carrito</button>
+                  <button class="dropdown-item" id="href-profile">Mi perfil</button>
+                  <div class="dropdown-divider"></div>
+                  <button class="dropdown-item btn-danger" onclick="salir()">Salir</button>
                 </div>
-            </div>
-        </nav>
-        <main navigo-container></main>
-        <footer class="text-muted">
-            <div class="container">
-                <p class="float-end">
-                    <a href="#">Volver arriba</a>
-                </p>
-                <p>
-                    Este sitio forma parte de
-                    <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> - 2022
-                </p>
-                <p>Clickea <a target="_blank" href="/Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-            </div>
-        </footer>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main navigo-container></main>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> - 2022
+        </p>
+        <p>Clickea <a target="_blank" href="/Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+      </div>
+    </footer>
 
-        
-        <script src="//unpkg.com/navigo"></script>
-    </body>
+    
+    <script src="//unpkg.com/navigo"></script>
+  </body>
 </html>
