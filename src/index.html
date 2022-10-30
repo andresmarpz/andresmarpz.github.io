@@ -32,49 +32,33 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1" id="navbar">
       <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav w-100 justify-content-between" style="align-items: center; padding: 4px 0">
-            <li class="nav-item">
-              <a class="nav-link active" href="/" data-navigo>Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/categories" data-navigo>Categorías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/sell" data-navigo>Vender</a>
-            </li>
-            <li class="nav-item">
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="nav-dropdown-tg"
-                  data-toggle="dropdown"
-                  data-bs-auto-close="true"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-                  Log in
-                </button>
-                <div class="dropdown-menu" aria-labelledby="nav-dropdown-tg">
-                  <button class="dropdown-item" id="href-cart">Carrito</button>
-                  <button class="dropdown-item" id="href-profile">Mi perfil</button>
-                  <div class="dropdown-divider"></div>
-                  <button class="dropdown-item btn-danger" onclick="salir()">Salir</button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" href="/" data-navigo>Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/categories" data-navigo>Categorías</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/sell" data-navigo>Vender</a>
+						</li>
+					</ul>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="nav-dropdown-tg" data-bs-toggle="dropdown" aria-expanded="false">
+							Dropdown button
+						</button>
+						<div class="dropdown-menu" aria-labelledby="nav-dropdown-tg">
+							<button class="dropdown-item" id="href-cart">Carrito</button>
+							<button class="dropdown-item" id="href-profile">Mi perfil</button>
+							<div class="dropdown-divider"></div>
+							<button class="dropdown-item btn-danger" onclick="salir()">Salir</button>
+						</div>
+					</div>
+				</div>
       </div>
     </nav>
     <main navigo-container></main>
