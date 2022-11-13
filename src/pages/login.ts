@@ -1,14 +1,22 @@
 import { router } from "../router";
-import { Page } from "../types";
+import { Page, Profile } from "../types";
 
 (window as any).handleLoginSubmit = function handleLoginSubmit(event: Event) {
 	event.preventDefault();
 
 	const email = (document?.getElementById('user-email-input') as HTMLInputElement)?.value;
 	const password = (document?.getElementById('user-pass-input') as HTMLInputElement)?.value;
+	const profile: Profile = {
+		firstName: '',
+		firstLastName: '',
+		secondName: '',
+		secondLastName: '',
+		email,
+		password,
+		contactNumber: ''
+	}
 
-	const username = { email, password };
-	localStorage.setItem('profile', JSON.stringify(username));
+	localStorage.setItem('profile', JSON.stringify(profile));
 
 	router.navigate(localStorage.getItem('lastUrl') || '/');
 }

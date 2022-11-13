@@ -50,7 +50,9 @@ export default function createRoutes() {
         }
       }
     },
-    after: () => {
+    after: (match) => {
+			if(!(match.url === 'login'))
+			localStorage.setItem('lastUrl', match.url + (match.queryString ? '?' + match.queryString : ''));
       const user = document.getElementById('nav-dropdown-tg');
       if (user && localStorage.getItem('profile')) {
         const profile = JSON.parse(localStorage.getItem('profile')!);

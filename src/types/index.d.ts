@@ -8,3 +8,13 @@ export type CartProduct = {
 	currency: "USD" | "UYU",
 	image: string
 }
+
+export interface Profile{
+	firstName: string,
+	secondName: string,
+	firstLastName: string,
+	secondLastName: string,
+	email: string,
+	password: string,
+	contactNumber: string,
+}
