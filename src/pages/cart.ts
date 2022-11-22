@@ -253,9 +253,9 @@ const Cart: Page = async (path) => {
 								<strong>Envío</strong>
 								
 								<div class='dy-cnt d-flex my-2' id='delivery'>
-									<button class="dy-btn dy-selected" id='dy-free'>Gratis</button>
-									<button class="dy-btn" id='dy-express'>Express (3%)</button>
-									<button class="dy-btn" id='dy-turbo'>Turbo (7%)</button>
+									<button type="button" class="dy-btn dy-selected" id='dy-free'>Gratis</button>
+									<button type="button" class="dy-btn" id='dy-express'>Express (3%)</button>
+									<button type="button" class="dy-btn" id='dy-turbo'>Turbo (7%)</button>
 								</div>
 								
 								<div class='dy-date' id='dy-date'>
