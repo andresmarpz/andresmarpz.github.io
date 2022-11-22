@@ -53,8 +53,8 @@ var Er=Object.defineProperty;var br=(i,t,e)=>t in i?Er(i,t,{enumerable:!0,config
 								<strong>Moneda</strong>
 
 								<div class="dy-cnt d-flex mt-2" id="moneda">
-									<button class="mon-btn dy-selected" id='mon-uyu'>Pesos Uruguayos</button>
-									<button class="mon-btn" id='mon-usd'>D\xF3lares</button>
+									<button type="button" class="mon-btn dy-selected" id='mon-uyu'>Pesos Uruguayos</button>
+									<button type="button" class="mon-btn" id='mon-usd'>D\xF3lares</button>
 								</div>
 							</div>
 							<div class="py-4">
